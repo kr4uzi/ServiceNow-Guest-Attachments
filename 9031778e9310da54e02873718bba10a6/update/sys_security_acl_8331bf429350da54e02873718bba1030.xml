@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>true</advanced>
+        <condition/>
+        <description>Allow create for records in sys_attachment, for users with role public, and if the ACL script returns true.</description>
+        <local_or_existing>Local</local_or_existing>
+        <name>sys_attachment</name>
+        <operation display_value="create">create</operation>
+        <script><![CDATA[(function (attGr, rootRule) {
+
+	var allowedMimeTypes = gs.getProperty('guest.attachment.allowed_mime_types', '');
+	if (allowedMimeTypes) {
+		allowedMimeTypes = allowedMimeTypes.split(',').map(function (t) { return t.trim(); });
+		if (allowedMimeTypes.indexOf(attGr.getValue('content_type')) == -1) {
+			gs.eventQueue('glide.heartbeat', null, 'mime_types:' + allowedMimeTypes, '');
+			return false;
+		}
+	}
+
+	var allowedTables = gs.getProperty('guest.attachment.allowed_tables', '');
+	if (allowedTables) {
+		allowedTables = allowedTables.split(',').map(function (t) { return t.trim(); });
+		// field uploads happen via "hidden" attachments (those who are linked to the record,
+		// but do not show up in the attachment list) which are prefixed with ZZ_YY
+		allowedTables = allowedTables.concat(
+			allowedTables.filter(function (t) { return !t.startsWith('ZZ_YY'); })
+				.map(function (t) { return 'ZZ_YY' + t; })
+		);
+
+		if (allowedTables.indexOf(attGr.getValue('table_name')) == -1) {
+			gs.eventQueue('glide.heartbeat', null, 'table:' + allowedTables, '');
+			return false;
+		}
+	}
+
+	var attachmentSysIDs = gs.getSession().getClientData('att_guest_acls_attachments');
+	if (attachmentSysIDs) {
+		// Note: the value returned form Session-API is a Java String!
+		attachmentSysIDs = String(attachmentSysIDs).split(',');
+	} else {
+		attachmentSysIDs = [];
+	}
+
+	var uploadLimit = parseInt(gs.getProperty('guest.attachment.upload_limit', '-1'));
+	if (uploadLimit != -1) {
+		if (attachmentSysIDs.length > uploadLimit) {
+			gs.eventQueue('glide.heartbeat', null, 'limit', '');
+			return false;
+		}
+	}
+
+	return true;
+	
+})(current, root_rule);]]></script>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>markus.kraus</sys_created_by>
+        <sys_created_on>2024-08-30 09:55:45</sys_created_on>
+        <sys_id>8331bf429350da54e02873718bba1030</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>sys_attachment</sys_name>
+        <sys_package display_value="Guest Attachments" source="9031778e9310da54e02873718bba10a6">9031778e9310da54e02873718bba10a6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Guest Attachments">9031778e9310da54e02873718bba10a6</sys_scope>
+        <sys_update_name>sys_security_acl_8331bf429350da54e02873718bba1030</sys_update_name>
+        <sys_updated_by>markus.kraus</sys_updated_by>
+        <sys_updated_on>2024-08-30 11:31:45</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+</record_update>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Comma-separated list of mime-types which guest users are allowed to upload.&#13;
+https://www.iana.org/assignments/media-types/media-types.xhtml&#13;
+&#13;
+Note: A empty value means all mime-types are allowed.</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>guest.attachment.allowed_mime_types</name>
+        <read_roles/>
+        <suffix/>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>markus.kraus</sys_created_by>
+        <sys_created_on>2024-08-30 09:41:54</sys_created_on>
+        <sys_id>9d02b7c69350da54e02873718bba100a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>guest.attachment.allowed_mime_types</sys_name>
+        <sys_package display_value="Guest Attachments" source="9031778e9310da54e02873718bba10a6">9031778e9310da54e02873718bba10a6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Guest Attachments">9031778e9310da54e02873718bba10a6</sys_scope>
+        <sys_update_name>sys_properties_9d02b7c69350da54e02873718bba100a</sys_update_name>
+        <sys_updated_by>markus.kraus</sys_updated_by>
+        <sys_updated_on>2024-08-30 09:41:54</sys_updated_on>
+        <type>string</type>
+        <value/>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=9d02b7c69350da54e02873718bba100a"/>
+</record_update>
