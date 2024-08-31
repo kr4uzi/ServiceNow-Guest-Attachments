@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <max_drift/>
+        <name>Guest Attachments - Cleanup Attachments</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="Markus Kraus">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period>1970-01-01 12:00:00</run_period>
+        <run_start>2024-08-31 21:53:27</run_start>
+        <run_time>1969-12-31 23:00:00</run_time>
+        <run_type>periodically</run_type>
+        <script><![CDATA[(function () {
+	
+	var sessionGr = new GlideRecord('sys_user_session');
+	sessionGr.addNotNullQuery('invalidated');
+	sessionGr.orderByDesc('invalidated');
+	sessionGr.query();
+
+	var sessions = GlideSessions.get();
+	while (sessionGr.next()) {
+		var session = sessions.getSession(sessionGr.id);
+		if (session) {
+			session = session.getHS();
+		}
+
+		if (session) {
+			var attachments = httpSession.getAttribute('att_guest_acls_attachments');
+			if (attachments) {
+				gs.info(sessionGr.id + ': ' + attachments);
+			}
+		}
+	}
+
+})();]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>markus.kraus</sys_created_by>
+        <sys_created_on>2024-08-31 21:53:27</sys_created_on>
+        <sys_id>7d92ab2693145694e02873718bba1057</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Guest Attachments - Cleanup Attachments</sys_name>
+        <sys_package display_value="Guest Attachments" source="9031778e9310da54e02873718bba10a6">9031778e9310da54e02873718bba10a6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Guest Attachments">9031778e9310da54e02873718bba10a6</sys_scope>
+        <sys_update_name>sysauto_script_7d92ab2693145694e02873718bba1057</sys_update_name>
+        <sys_updated_by>markus.kraus</sys_updated_by>
+        <sys_updated_on>2024-08-31 21:53:27</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>
