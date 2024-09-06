@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Wether or not the query business rule for attachments is activated. This should generally improve the performance of the instance, but can be undesired if there are other public applications which make use of attachments.</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>guest.attachment.limit_query</name>
+        <read_roles/>
+        <suffix/>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>markus.kraus</sys_created_by>
+        <sys_created_on>2024-09-01 07:00:37</sys_created_on>
+        <sys_id>d750adf693d09210e02873718bba10b4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>guest.attachment.limit_query</sys_name>
+        <sys_package display_value="Guest Attachments" source="9031778e9310da54e02873718bba10a6">9031778e9310da54e02873718bba10a6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Guest Attachments">9031778e9310da54e02873718bba10a6</sys_scope>
+        <sys_update_name>sys_properties_d750adf693d09210e02873718bba10b4</sys_update_name>
+        <sys_updated_by>markus.kraus</sys_updated_by>
+        <sys_updated_on>2024-09-01 07:00:37</sys_updated_on>
+        <type>boolean</type>
+        <value>true</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=d750adf693d09210e02873718bba10b4"/>
+</record_update>
